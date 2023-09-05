@@ -6,36 +6,29 @@ void main() {
   runApp(const Pro());
 }
 
-
 class Pro extends StatelessWidget {
   const Pro({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (Context) => Model(),
-        child:  MyApp(),
-      );
+      create: (context) => Model(),
+      child: const MyApp(),
+    );
   }
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
-      
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: PageOne()
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: PageOne());
   }
 }
 
@@ -44,34 +37,31 @@ class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data=Provider.of<Model>(context);
+    final data = Provider.of<Model>(context);
     return Container(
-      color: Colors.black,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-
-        children: [
-          MaterialButton(
-            color: data.puerto?Colors.amber:Colors.red,
-            onPressed: (){
-              data.on();
-              print("boton Encender");
-            },
-            child: const Text("Led")),
+        color: Colors.black,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MaterialButton(
+                color: data.puerto ? Colors.amber : Colors.red,
+                onPressed: () {
+                  data.on();
+                  print("boton Encender");
+                },
+                child: const Text("Led")),
             const SizedBox(
               width: 20,
             ),
             MaterialButton(
-              color: Colors.amber,
-            child: const Text("Apagar"),
-
-            onPressed: (){
-            //  data=false;
-               print("boton Apagar");
-            }),
-        ],
-      )
-    );
+                color: data.puerto ? Colors.green : Colors.red,
+                child: const Text("Conectar server... "),
+                onPressed: () {
+                  print("conectaando a server..");
+                  data.conectarSocket();
+                }),
+          ],
+        ));
   }
 }
