@@ -45,11 +45,15 @@ class PageOne extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MaterialButton(
-                color: data.puerto ? Colors.amber : Colors.red,
-                onPressed: () {
-                  data.on();
-                  print("boton Encender");
-                },
+                color: data.puerto
+                    ? Color.fromARGB(255, 48, 146, 232)
+                    : Colors.red,
+                onPressed: data.estado_server
+                    ? () {
+                        data.on();
+                        print("boton Encender");
+                      }
+                    : null,
                 child: const Text("Led")),
             const SizedBox(
               width: 20,
@@ -60,8 +64,7 @@ class PageOne extends StatelessWidget {
                 onPressed: () {
                   print("socket esta data.server");
                   print(data.estado_server);
-                  data.conectarSocket()
-                  ;
+                  data.conectarSocket();
                 }),
           ],
         ));
