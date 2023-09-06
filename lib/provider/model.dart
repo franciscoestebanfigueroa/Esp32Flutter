@@ -10,7 +10,7 @@ class Model with ChangeNotifier {
 
   bool get puerto => _puerto2;
   bool get estado_server => _estdo_server;
-
+  String _uri = 'http://server-ia2.onrender.com:443';
   on() {
     socket.emit("mensajex", {"nombre": "Led 2", "estado": _puerto2.toString()});
 
@@ -23,7 +23,9 @@ class Model with ChangeNotifier {
     try {
       socket = IO.io(
           //"http://localhost:3000",
-          'http://192.168.0.12:3000',
+          //'http://192.168.0.12:3000',
+          _uri,
+
           IO.OptionBuilder()
               .setTransports(['websocket']) // for Flutter or Dart VM
               //.setExtraHeaders({}) // optional
