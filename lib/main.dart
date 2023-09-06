@@ -55,11 +55,13 @@ class PageOne extends StatelessWidget {
               width: 20,
             ),
             MaterialButton(
-                color: data.puerto ? Colors.green : Colors.red,
+                color: data.estado_server ? Colors.green : Colors.red,
                 child: const Text("Conectar server... "),
                 onPressed: () {
-                  print("conectaando a server..");
-                  data.conectarSocket();
+                  print("socket esta data.server");
+                  print(data.estado_server);
+                  data.conectarSocket()
+                  ;
                 }),
           ],
         ));
