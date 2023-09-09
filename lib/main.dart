@@ -48,12 +48,11 @@ class PageOne extends StatelessWidget {
                 color: data.puerto
                     ? Color.fromARGB(255, 48, 146, 232)
                     : Colors.red,
-                onPressed: data.estado_server
-                    ? () {
-                        data.on();
-                        print("boton Encender");
-                      }
-                    : null,
+                onPressed: // data.estado_server
+                    () {
+                  data.on();
+                  print("boton Encender");
+                },
                 child: const Text("Led")),
             const SizedBox(
               width: 20,
