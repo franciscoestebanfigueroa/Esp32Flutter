@@ -18,12 +18,14 @@ class Model with ChangeNotifier {
           _uri,
           IO.OptionBuilder()
               .setTransports(['websocket']) // for Flutter or Dart VM
-              //.setExtraHeaders({}) // optional
-              .enableAutoConnect()
+              .setExtraHeaders({"data": "xxx"}) // optional
+              //.enableAutoConnect()
               .build());
 
-      socket.close();
-      print("creando instancia de socket io");
+      //socket.close();
+      print("creando instancia de socket io ${socket.disconnected}");
+
+      socket.onReconnect((data) => print("conectado"));
     } catch (e) {
       print(e);
     }
@@ -39,10 +41,15 @@ class Model with ChangeNotifier {
 
   conectarSocket() {
     socket.connect();
-    _estdo_server = true;
+    socket.ack(
+      "mensajex",
+    );
 
-    socket.onConnect((data) {
-      print("conectado a server.. $data");
+    _estdo_server = true;
+    notifyListeners();
+
+    socket.onConnect((_) {
+      print("conectado a server.. ");
 
       socket.on("mensajex", (data) {
         print("escucho cambios");
