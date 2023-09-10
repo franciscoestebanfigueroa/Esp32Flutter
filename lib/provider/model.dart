@@ -11,28 +11,10 @@ class Model with ChangeNotifier {
   String _uri = 'https://server-ia2.onrender.com';
 
   Model() {
-    try {
-      socket = IO.io(
-          //"http://localhost:3000",
-          //'http://192.168.0.12:3000',
-          _uri,
-          IO.OptionBuilder()
-              .setTransports(['websocket']) // for Flutter or Dart VM
-              .setExtraHeaders({"data": "xxx"}) // optional
-              //.enableAutoConnect()
-              .build());
-
-      //socket.close();
-      print("creando instancia de socket io ${socket.disconnected}");
-
-      socket.onReconnect((data) => print("conectado"));
-    } catch (e) {
-      print(e);
-    }
+    
   }
   on() {
-    socket
-        .emit("mensajex", {"nombre": "Led 2", "estado": "_puerto2.toString()"});
+    
 
     _puerto2 = !_puerto2;
     print("estado puerto $_puerto2");
@@ -40,38 +22,44 @@ class Model with ChangeNotifier {
   }
 
   conectarSocket() {
-    socket.connect();
-    socket.ack(
-      "mensajex",
+    try {
+      socket = IO.io(
+          //"http://localhost:3000",
+          //'http://192.168.0.12:3000',
+          _uri,
+          IO.OptionBuilder()
+              .setTransports(['websocket']) // for Flutter or Dart VM
+             // .setExtraHeaders({"data": "xxx"}) // optional
+              //.enableAutoConnect()
+              .build());
+
+     // socket.close();
+     socket.connect();
+      print("creando instancia de socket io ");
+
+    socket.onConnect((data) => print("por finnnnn"));
+    socket.onConnectError((e) =>
+      print("conectado a server..$e ")
     );
-
-    _estdo_server = true;
-    notifyListeners();
-
-    socket.onConnect((_) {
-      print("conectado a server.. ");
-
-      socket.on("mensajex", (data) {
-        print("escucho cambios");
-        print(data);
-        print(data["nombre"]);
-        print(data["estado"]);
-        if (data["estado"].toString() == "true") {
-          print("llego true");
-          _puerto2 = true;
-          notifyListeners();
-        } else {
-          _puerto2 = false;
-          notifyListeners();
-        }
-      });
-    });
 
     socket.onDisconnect((data) {
       _estdo_server = false;
       print("se apago el server");
       notifyListeners();
-    });
+    });  
+      
+    
+    
+    
+    
+    } catch (e) {
+      print(e);
+    }
+   
+   //    _estdo_server = true;
+   // notifyListeners();
+
+    
   }
 
   desconectar() {

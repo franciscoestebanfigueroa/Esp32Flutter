@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:prueba/provider/model.dart';
 
+
 void main() {
   runApp(const Pro());
 }
@@ -48,11 +49,13 @@ class PageOne extends StatelessWidget {
                 color: data.puerto
                     ? Color.fromARGB(255, 48, 146, 232)
                     : Colors.red,
-                onPressed: // data.estado_server
-                    () {
-                  data.on();
-                  print("boton Encender");
-                },
+                onPressed:
+                     () {
+                        data.on();
+                        
+                        print("boton Encender Led  ");
+                      },
+                    
                 child: const Text("Led")),
             const SizedBox(
               width: 20,
