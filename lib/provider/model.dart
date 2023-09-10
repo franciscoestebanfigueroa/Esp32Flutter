@@ -37,7 +37,10 @@ class Model with ChangeNotifier {
      socket.connect();
       print("creando instancia de socket io ");
 
-    socket.onConnect((data) => print("por finnnnn"));
+    socket.onConnect((data)  {
+      print("por finnnnn");
+      socket.emit("mensajex",{"nombre": "pancho" , "estado" : true});
+      });
     socket.onConnectError((e) =>
       print("conectado a server..$e ")
     );
