@@ -15,8 +15,8 @@ class Model with ChangeNotifier {
   Model() {
     socket = IO.io(
         //"http://localhost:3000",
-        'http://192.168.0.12:443',
-        // _uri,
+        //'http://192.168.0.12:443',
+         _uri,
         IO.OptionBuilder()
             .setTransports(['websocket']) // for Flutter or Dart VM
             // .setExtraHeaders({"data": "xxx"}) // optional
@@ -44,7 +44,7 @@ class Model with ChangeNotifier {
         print("evaluando data ${data}");
         try {
           String nombre = data['nombre'];
-          String estado = data['estado'];
+          dynamic estado = data['estado'];
           print('Nombre: $nombre');
           print('Estado: $estado');
         } catch (e) {
