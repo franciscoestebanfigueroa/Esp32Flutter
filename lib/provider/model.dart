@@ -10,7 +10,7 @@ class Model with ChangeNotifier {
 
   bool get puerto => _puerto2;
   bool get estado_server => _estdo_server;
-  String _uri = 'https://server-ia2.onrender.com';
+  String _uri = 'https://servertata.onrender.com';
 
   Model() {
     socket = IO.io(
@@ -30,7 +30,7 @@ class Model with ChangeNotifier {
     print("estado puerto $_puerto2");
     notifyListeners();
     socket
-        .emit("mensajex", {"nombre": "puerto2", "estado": _puerto2.toString()});
+        .emit("mensajex", {"nombre": "fluter", "estado": _puerto2.toString()});
   }
 
   conectarSocket() {
